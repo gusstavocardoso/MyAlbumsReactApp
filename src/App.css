@@ -51,73 +51,54 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* App.css */
+/* Estilize a lista de álbuns */
+ul {
+  list-style: none;
+  padding: 0;
+}
 
-/* ... outros estilos ... */
-
-.form-container {
+/* Estilize cada item da lista */
+li {
+  margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  margin: 0 auto;
 }
 
-/* Adicione estilos para o formulário */
-form {
+/* Estilize o container da lista para alinhamento ao centro */
+.list-container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap; /* Adicione flex-wrap para que os itens se ajustem horizontalmente quando necessário */
 }
 
-label {
-  text-align: left;
-  margin-bottom: 5px;
-  font-weight: bold;
+/* Adicione espaço após a lista de álbuns */
+.list-container:after {
+  content: ""; /* Crie um pseudo-elemento para adicionar espaço */
+  margin-bottom: 20px;
+  display: block;
+  clear: both;
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* Estilos para os botões */
-.button-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-button {
+/* Estilize os botões de editar e remover */
+.edit-button,
+.remove-button {
   background-color: #007bff;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 10px; /* Espaçamento entre botões */
+  margin-right: 5px; /* Adicione margem à direita para espaçamento horizontal */
+  width: 80px; /* Defina a largura desejada para os botões */
+  text-align: center; /* Alinhe o conteúdo ao centro */
+  margin-bottom: 10px; /* Adicione margem inferior para espaçamento vertical entre botões */
 }
 
-button:last-child {
-  margin-right: 0; /* Remove o espaçamento à direita do último botão */
+/* Estilize o contêiner dos botões fixos */
+.fixed-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column; /* Alinhe os botões verticalmente */
 }
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.container {
-  margin: 10px auto; 
-  padding: 20px; 
-}
-
-
-
-
