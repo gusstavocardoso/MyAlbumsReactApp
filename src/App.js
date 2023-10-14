@@ -25,12 +25,12 @@ function App() {
 
   const handleAddAlbum = () => {
     const { banda, nomeAlbum, anoLancamento, integrantes } = formData;
-  
+
     if (!banda || !nomeAlbum || !anoLancamento) {
       setMessage("Por favor, preencha todos os campos obrigatórios.");
       return;
     }
-  
+
     if (albums.some((album) => album.banda === banda && album.nomeAlbum === nomeAlbum)) {
       setMessage("Este álbum já foi cadastrado para esta banda.");
     } else {
@@ -40,7 +40,7 @@ function App() {
         anoLancamento,
         integrantes,
       };
-  
+
       setAlbums([...albums, newAlbum]);
       setFormData({
         banda: "",
@@ -60,20 +60,28 @@ function App() {
 
   const handleUpdateAlbum = () => {
     if (editIndex !== -1) {
-      // Cria uma cópia da lista de álbuns para fazer a atualização
-      const updatedAlbums = [...albums];
-
-      // Substitui o álbum original pelo álbum editado
-      updatedAlbums[editIndex] = { ...formData };
-
-      // Atualiza o estado com a lista de álbuns atualizada
-      setAlbums(updatedAlbums);
-
-      // Limpa o índice de edição e o formulário
-      setEditIndex(-1);
-      setFormData({ banda: "", nomeAlbum: "", anoLancamento: "", integrantes: "" });
-
-      setMessage("Álbum editado com sucesso.");
+      const { banda, nomeAlbum, anoLancamento, integrantes } = formData;
+  
+      if (!banda || !nomeAlbum || !anoLancamento || !integrantes) {
+        setMessage("Por favor, preencha todos os campos.");
+        return;
+      }
+  
+      // Verifique se os novos dados não correspondem a nenhum álbum existente, exceto o álbum sendo editado
+      const isDuplicate = albums.some((album, index) => {
+        return index !== editIndex && album.banda === banda && album.nomeAlbum === nomeAlbum;
+      });
+  
+      if (isDuplicate) {
+        setMessage("Este álbum já foi cadastrado para esta banda.");
+      } else {
+        const updatedAlbums = [...albums];
+        updatedAlbums[editIndex] = { ...formData };
+        setAlbums(updatedAlbums);
+        setEditIndex(-1);
+        setFormData({ banda: "", nomeAlbum: "", anoLancamento: "", integrantes: "" });
+        setMessage("Álbum editado com sucesso.");
+      }
     }
   };
 
@@ -126,12 +134,13 @@ function App() {
       </div>
       <div>
         <h2>Lista de Álbuns</h2>
+        <div className="list-container"></div>
         <ul>
           {albums.map((album, index) => (
             <li key={index}>
               <strong>Banda:</strong> {album.banda}, <strong>Álbum:</strong> {album.nomeAlbum}, <strong>Ano de Lançamento:</strong> {album.anoLancamento}, <strong>Integrantes:</strong> {album.integrantes.join(", ")}
-              <button onClick={() => handleEditAlbum(index)}>Editar</button>
-              <button onClick={() => handleDeleteAlbum(index)}>Remover</button>
+              <button className="edit-button" onClick={() => handleEditAlbum(index)}>Editar</button>
+              <button className="remove-button" onClick={() => handleDeleteAlbum(index)}>Remover</button>
             </li>
           ))}
         </ul>
